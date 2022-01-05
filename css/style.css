@@ -1,0 +1,177 @@
+
+
+/*Обнуление*/
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside,
+section {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  min-width: 320px;
+}
+
+body {
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  font-family: "Gilroy";
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+button,
+textarea {
+  font-family: "Gilroy";
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*--------------------*/
+
+
+
+
+
+
+
+
+
+
+
+body, textarea, div, button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+.task__list, .add__Task__Container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1180px;
+    padding: 12px;
+    margin: 0 auto;
+}
+.act__List{
+    background-color: rgb(206, 206, 206);
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.comp__list{
+    background-color: rgb(146, 230, 114);
+    border-radius: 4px;
+    font-size: 13px;
+    margin: 18px 0 0 0;
+}
+
+.comp__list p {
+    text-decoration: line-through;
+
+}
+
+.add__Task__Container{
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.add__Task__Textarea{
+    border: 1px solid grey;
+}
+
+.add__Task__Btn{
+    padding: 12px;
+
+}
+
+.task__text{
+    width: 100%;
+}
+.task__text:hover{
+    text-decoration: line-through;
+}
+
+.task {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.check__task__label{
+    margin: 0 0 0 6px;
+}
+
+.del__btn{
+    background-color: rgb(243, 36, 36);
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    line-height: 1.4;
+    margin: 0 0 0 auto;
+}
