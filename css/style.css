@@ -151,9 +151,17 @@ body, textarea, div, button, p {
   text-decoration: line-through;
 
 }
+.compTaskArticle:hover p {
+  text-decoration: none;
+}
 .delBtn{
   padding: 8px;
   background-color: rgb(150, 63, 63);
+  color: aliceblue;
+}
+.editBtn{
+  padding: 8px;
+  background-color: rgb(66, 66, 66);
   color: aliceblue;
 }
 .actTaskText, .compTaskText{
@@ -168,4 +176,67 @@ body, textarea, div, button, p {
 .comp__list article {
   display: flex;
   padding: 8px;
+}
+
+
+
+.popupWrapper{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.253);
+}
+
+.popup{
+  background-color: #fff;
+  padding: 12px;
+  height: fit-content;
+  margin: 12px;
+}
+.changedTask{
+  display: block;
+}
+
+
+.changedTaskTextarea{
+  width: 100%;
+  margin: 12px 0;
+  border: 1px solid #000;
+}
+
+.editBtns{
+  display: flex;
+  justify-content: space-between;
+}
+.changeTaskBtn{
+  padding: 8px;
+  background-color: rgb(72, 175, 59);
+  color: #fff;
+}
+.cancelChangeBtn{
+  padding: 8px;
+  background-color: rgb(175, 59, 59);
+  color: #fff;
+}
+
+.successChange{
+  display: block;
+  padding: 8px;
+  width: 100%;
+  margin: 12px 0;
+  background-color: rgb(72, 175, 59);
+  color: #fff;
+}
+.errorChange{
+  display: block;
+  padding: 8px;
+  width: 100%;
+  margin: 12px 0;
+  background-color: rgb(175, 59, 59);
+  color: #fff;
 }

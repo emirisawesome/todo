@@ -151,8 +151,111 @@ const completeTask = (event) => {
 
 }
 
+const deCompleteTask = (event) => {
+    let target = event.target.innerHTML
+    let actTasks = JSON.parse(localStorage.getItem('acttasks'))
+    let compTasks = JSON.parse(localStorage.getItem('comptasks'))
+
+    compTasks.forEach((e, i) => {
+        if (e == target) {
+            actTasks.unshift(e)
+            compTasks.splice(i, 1)
+            localStorage.setItem('acttasks', JSON.stringify(actTasks))
+            localStorage.setItem('comptasks', JSON.stringify(compTasks))
+            displayTasks()
+            return
+        }
+    })
+}
+
+const changeTaskVal = (changedTaskTextareaVal, target) => {
+
+    let actTasks = JSON.parse(localStorage.getItem('acttasks'))
+    let compTasks = JSON.parse(localStorage.getItem('comptasks'))
+
+    actTasks.forEach((e, i) => {
+        if (e == target) {
+            actTasks.splice(i, 1, changedTaskTextareaVal)
+            localStorage.setItem('acttasks', JSON.stringify(actTasks))
+            localStorage.setItem('comptasks', JSON.stringify(compTasks))
+            displayTasks()
+            return true
+        }
+    })
+
+    compTasks.forEach((e, i) => {
+        if (e == target) {
+            compTasks.splice(i, 1, changedTaskTextareaVal)
+            localStorage.setItem('acttasks', JSON.stringify(actTasks))
+            localStorage.setItem('comptasks', JSON.stringify(compTasks))
+            displayTasks()
+            return true
+        }
+    })
+}
+
+const editTask = (event) => {
+    let target = event.target.dataset.teskname
+
+    let popupWrapper = document.createElement('div')
+    popupWrapper.className = 'popupWrapper'
+    body.prepend(popupWrapper)
+
+    let popup = document.createElement('article')
+    popup.className = 'popup'
+    popupWrapper.append(popup)
+
+    let changedTask = document.createElement('p')
+    changedTask.className = 'changedTask'
+    changedTask.innerHTML = `Введите новое значение для задачи: <strong style='text-decoration:underline;'>${target}</strong>`
+    popup.append(changedTask)
+
+    let changedTaskTextarea = document.createElement('textarea')
+    changedTaskTextarea.className = 'changedTaskTextarea'
+    changedTaskTextarea.id = 'changedTaskTextarea'
+    popup.append(changedTaskTextarea)
+
+    let editBtns = document.createElement('div')
+    editBtns.className = 'editBtns'
+    editBtns.id = 'editBtns'
+    popup.append(editBtns)
 
 
+    let successChange = document.createElement('span')
+    successChange.className = 'successChange'
+    successChange.id = 'successChange'
+    successChange.innerHTML = 'Задача заменена'
+
+    let errorChange = document.createElement('span')
+    errorChange.className = 'errorChange'
+    errorChange.id = 'errorChange'
+    errorChange.innerHTML = 'Ошибка при замене'
+
+
+    let changeTaskBtn = document.createElement('button')
+    changeTaskBtn.innerHTML = 'Изменить'
+    changeTaskBtn.className = 'changeTaskBtn'
+    changeTaskBtn.id = 'changeTaskBtn'
+    changeTaskBtn.addEventListener('click', () => {
+        changeTaskVal(changedTaskTextarea.value, target)
+        popup.append(successChange)
+        setTimeout(() => {
+            popupWrapper.remove()
+        }, 800)
+
+    })
+    editBtns.append(changeTaskBtn)
+
+    let cancelChangeBtn = document.createElement('button')
+    cancelChangeBtn.innerHTML = 'Отмена'
+    cancelChangeBtn.className = 'cancelChangeBtn'
+    cancelChangeBtn.id = 'cancelChangeBtn'
+    cancelChangeBtn.addEventListener('click', () => {
+        popupWrapper.remove()
+    })
+    editBtns.append(cancelChangeBtn)
+
+}
 
 const displayTasks = () => {
     let actTasks = JSON.parse(localStorage.getItem('acttasks'))
@@ -177,6 +280,15 @@ const displayTasks = () => {
         actTaskText.innerHTML = `${i}`
         actTaskArticle.append(actTaskText)
 
+        let editBtn = document.createElement('button')
+        editBtn.className = 'editBtn'
+        editBtn.innerHTML = 'Edit'
+        editBtn.id = `${taskId}`
+        editBtn.setAttribute('data-teskname', `${i}`)
+        editBtn.addEventListener('click', editTask)
+        actTaskArticle.append(editBtn)
+
+
         let delBtn = document.createElement('button')
         delBtn.className = 'delBtn'
         delBtn.innerHTML = 'Delete'
@@ -195,6 +307,7 @@ const displayTasks = () => {
         let compTaskArticle = document.createElement('article')
         compTaskArticle.className = 'compTaskArticle'
         compTaskArticle.id = `${taskId}`
+        compTaskArticle.addEventListener('click', deCompleteTask)
         compList.append(compTaskArticle)
 
         let compTaskText = document.createElement('p')
@@ -202,6 +315,14 @@ const displayTasks = () => {
         compTaskText.id = `${taskId}`
         compTaskText.innerHTML = `${i}`
         compTaskArticle.append(compTaskText)
+
+        let editBtn = document.createElement('button')
+        editBtn.className = 'editBtn'
+        editBtn.innerHTML = 'Edit'
+        editBtn.id = `${taskId}`
+        editBtn.setAttribute('data-teskname', `${i}`)
+        editBtn.addEventListener('click', editTask)
+        compTaskArticle.append(editBtn)
 
         let delBtn = document.createElement('button')
         delBtn.className = 'delBtn'
