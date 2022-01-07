@@ -7,7 +7,7 @@ taskList.className = 'task__list'
 body.append(taskList)
 
 let actList = document.createElement('div')
-actList.className = 'act__List'
+actList.className = 'act__list'
 taskList.append(actList)
 
 let compList = document.createElement('div')
@@ -103,43 +103,121 @@ let transliterate = (text) => {
 };
 
 
-const actTask = []
 
+
+const localStorageDel = () => {
+
+}
 
 
 
 
 const deleteTask = (event) => {
-    let target = event.target.id
-    document.getElementById(`${target}`).remove();
-    actTask.forEach((e, i) => {
-        if (e == target) {
-            actTask.splice(i, 1)
-        }
-    })
+
+
 }
 
 
 
-const completeTask = (event) => {
-    let target = event.target.id
-    let completedTask = document.getElementById(`${target}`)
-    compList.append(completedTask)
+const completeTask = () => {
+
 
 }
+
+
+
+
+const displayTasks = () => {
+    let actTasks = JSON.parse(localStorage.getItem('acttasks'))
+    let compTasks = JSON.parse(localStorage.getItem('comptasks'))
+
+    actList.innerHTML = ''
+    compList.innerHTML = ''
+
+
+    for (const i of actTasks) {
+        let taskId = transliterate(i)
+
+        let actTaskArticle = document.createElement('article')
+        actTaskArticle.className = 'actTaskArticle'
+        actTaskArticle.id = `${taskId}`
+        actList.append(actTaskArticle)
+
+        let actTaskText = document.createElement('p')
+        actTaskText.className = 'actTaskText'
+        actTaskText.id = `${taskId}`
+        actTaskText.innerHTML = `${i}`
+        actTaskArticle.append(actTaskText)
+
+        let delBtn = document.createElement('button')
+        delBtn.className = 'delBtn'
+        delBtn.innerHTML = 'Delete'
+        delBtn.id = `${taskId}`
+        delBtn.addEventListener('click', deleteTask)
+
+        let editBtn = document.createElement('button')
+        editBtn.
+
+            actTaskArticle.append(delBtn)
+
+    }
+
+    for (const i of compTasks) {
+        let taskId = transliterate(i)
+
+        let compTaskArticle = document.createElement('article')
+        compTaskArticle.className = 'compTaskArticle'
+        compTaskArticle.id = `${taskId}`
+        compList.append(compTaskArticle)
+
+        let compTaskText = document.createElement('p')
+        compTaskText.className = 'compTaskText'
+        compTaskText.id = `${taskId}`
+        compTaskText.innerHTML = `${i}`
+        compTaskArticle.append(compTaskText)
+
+        let delBtn = document.createElement('button')
+        delBtn.className = 'delBtn'
+        delBtn.innerHTML = 'Delete'
+        delBtn.id = `${taskId}`
+        delBtn.addEventListener('click', deleteTask)
+        compTaskArticle.append(delBtn)
+
+
+    }
+}
+
+
+const localStorageAdd = (text) => {
+
+    let actTasks = JSON.parse(localStorage.getItem('acttasks'))
+    actTasks.unshift(text)
+
+    localStorage.setItem('acttasks', JSON.stringify(actTasks))
+
+    displayTasks()
+}
+
 
 
 
 
 const addTask = () => {
+    let taskTextareaVal = addTaskTextarea.value
+    // let taskId = transliterate(taskTextareaVal)
+    let localStorageActTasks = JSON.parse(localStorage.getItem('acttasks'))
+    let localStorageCompTasks = JSON.parse(localStorage.getItem('comptasks'))
+    let localStorageTasks = [...localStorageActTasks, ...localStorageCompTasks]
 
-    if (addTaskTextarea.value == '') {
+    if (taskTextareaVal == '') {
         alert('write some')
         addTaskTextarea.value = ''
 
         return
     }
-    for (const i of actTask) {
+
+
+    for (const i of localStorageTasks) {
         if (addTaskTextarea.value == i) {
             alert('write another')
             addTaskTextarea.value = ''
@@ -147,37 +225,11 @@ const addTask = () => {
         }
     }
 
-    let checkId = transliterate(addTaskTextarea.value)
 
-    actTask.push(checkId)
-
-    let task = document.createElement('article')
-    task.className = 'task'
-    task.id = `${checkId}`
-    actList.append(task)
-
-    let TaskText = document.createElement('p')
-    TaskText.innerHTML = `${addTaskTextarea.value}`
-    TaskText.className = 'task__text'
-    TaskText.id = `${checkId}`
-    task.append(TaskText)
-
-    TaskText.addEventListener('click', completeTask)
-
-
-    let delBtn = document.createElement('button')
-    delBtn.className = 'del__btn'
-    delBtn.innerHTML = 'Delete'
-    delBtn.id = `${checkId}`
-    task.append(delBtn)
-
-    delBtn.addEventListener('click', deleteTask)
-
+    localStorageAdd(taskTextareaVal)
     addTaskTextarea.value = ''
-
 }
 
 
-
-
 addTaskBtn.addEventListener('click', addTask)
+displayTasks()

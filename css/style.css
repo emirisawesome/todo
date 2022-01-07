@@ -106,72 +106,59 @@ h6 {
 
 
 
-body, textarea, div, button {
+body, textarea, div, button, p {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
 }
 
-.task__list, .add__Task__Container {
-    display: flex;
-    flex-direction: column;
-    max-width: 1180px;
-    padding: 12px;
-    margin: 0 auto;
-}
-.act__List{
-    background-color: rgb(206, 206, 206);
-    border-radius: 4px;
-    font-size: 13px;
-}
 
-.comp__list{
-    background-color: rgb(146, 230, 114);
-    border-radius: 4px;
-    font-size: 13px;
-    margin: 18px 0 0 0;
+.task__list, .add__Task__Container{
+  display: flex;
+  max-width: 960px;
+  margin: 21px auto;
 }
-
-.comp__list p {
-    text-decoration: line-through;
-
-}
-
-.add__Task__Container{
-    flex-wrap: nowrap;
-    flex-direction: row;
+.task__list{
+  flex-direction: column;
 }
 
 .add__Task__Textarea{
-    border: 1px solid grey;
+  width: 100%;
+  border: 1px solid #222;
 }
 
 .add__Task__Btn{
-    padding: 12px;
-
+  padding: 12px;
+  white-space: nowrap;
 }
 
-.task__text{
-    width: 100%;
-}
-.task__text:hover{
-    text-decoration: line-through;
-}
 
-.task {
-    padding: 12px;
-    display: flex;
-    align-items: center;
-}
 
-.check__task__label{
-    margin: 0 0 0 6px;
-}
 
-.del__btn{
-    background-color: rgb(243, 36, 36);
-    color: #fff;
-    padding: 5px;
-    border-radius: 4px;
-    line-height: 1.4;
-    margin: 0 0 0 auto;
+.act__list{
+  margin: 6px 0;
+  background-color: rgb(223, 223, 223);
+  width: 100%;
+
+}
+.act__list article{
+  display: flex;
+  padding: 8px;
+}
+.delBtn{
+  padding: 8px;
+  background-color: rgb(150, 63, 63);
+  color: aliceblue;
+}
+.actTaskText, .compTaskText{
+  width: 100%;
+}
+.comp__list{
+  margin: 6px 0;
+  background-color: rgb(121, 211, 125);
+  width: 100%;
+
+}
+.comp__list article {
+  display: flex;
+  padding: 8px;
 }
