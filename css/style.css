@@ -144,6 +144,13 @@ body, textarea, div, button, p {
   display: flex;
   padding: 8px;
 }
+.actTaskArticle:hover p{
+  text-decoration: line-through;
+}
+.compTaskArticle p{
+  text-decoration: line-through;
+
+}
 .delBtn{
   padding: 8px;
   background-color: rgb(150, 63, 63);

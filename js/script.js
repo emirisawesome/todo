@@ -104,23 +104,50 @@ let transliterate = (text) => {
 
 
 
-
-const localStorageDel = () => {
-
-}
-
-
-
-
 const deleteTask = (event) => {
+    let target = event.target.dataset.name
 
+    let actTasks = JSON.parse(localStorage.getItem('acttasks'))
+    let compTasks = JSON.parse(localStorage.getItem('comptasks'))
 
+    actTasks.forEach((e, i) => {
+        if (e == target) {
+            actTasks.splice(i, 1)
+            localStorage.setItem('acttasks', JSON.stringify(actTasks))
+            displayTasks()
+            return
+        }
+    });
+
+    compTasks.forEach((e, i) => {
+        if (e == target) {
+            compTasks.splice(i, 1)
+            localStorage.setItem('comptasks', JSON.stringify(compTasks))
+            displayTasks()
+            return
+        }
+    });
+
+    displayTasks()
 }
 
 
 
-const completeTask = () => {
+const completeTask = (event) => {
+    let target = event.target.innerHTML
+    let actTasks = JSON.parse(localStorage.getItem('acttasks'))
+    let compTasks = JSON.parse(localStorage.getItem('comptasks'))
 
+    actTasks.forEach((e, i) => {
+        if (e == target) {
+            compTasks.unshift(e)
+            actTasks.splice(i, 1)
+            localStorage.setItem('acttasks', JSON.stringify(actTasks))
+            localStorage.setItem('comptasks', JSON.stringify(compTasks))
+            displayTasks()
+            return
+        }
+    })
 
 }
 
@@ -141,6 +168,7 @@ const displayTasks = () => {
         let actTaskArticle = document.createElement('article')
         actTaskArticle.className = 'actTaskArticle'
         actTaskArticle.id = `${taskId}`
+        actTaskArticle.addEventListener('click', completeTask)
         actList.append(actTaskArticle)
 
         let actTaskText = document.createElement('p')
@@ -153,12 +181,11 @@ const displayTasks = () => {
         delBtn.className = 'delBtn'
         delBtn.innerHTML = 'Delete'
         delBtn.id = `${taskId}`
+        delBtn.setAttribute('data-name', `${i}`)
         delBtn.addEventListener('click', deleteTask)
 
-        let editBtn = document.createElement('button')
-        editBtn.
 
-            actTaskArticle.append(delBtn)
+        actTaskArticle.append(delBtn)
 
     }
 
@@ -180,7 +207,10 @@ const displayTasks = () => {
         delBtn.className = 'delBtn'
         delBtn.innerHTML = 'Delete'
         delBtn.id = `${taskId}`
+        delBtn.setAttribute('data-name', `${i}`)
         delBtn.addEventListener('click', deleteTask)
+
+
         compTaskArticle.append(delBtn)
 
 
