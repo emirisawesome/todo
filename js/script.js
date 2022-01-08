@@ -103,6 +103,11 @@ let transliterate = (text) => {
 };
 
 
+if (localStorage.getItem('acttasks') == null && localStorage.getItem('comptasks') == null) {
+    localStorage.setItem('acttasks', JSON.stringify([]))
+    localStorage.setItem('comptasks', JSON.stringify([]))
+}
+
 
 const deleteTask = (event) => {
     let target = event.target.dataset.name
@@ -150,6 +155,7 @@ const completeTask = (event) => {
     })
 
 }
+
 
 const deCompleteTask = (event) => {
     let target = event.target.innerHTML
