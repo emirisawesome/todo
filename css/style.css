@@ -111,10 +111,12 @@ body, textarea, div, button, p {
     font-size: 13px;
 }
 
-
+.add__Task__Container {
+  padding: 0 8px;
+}
 .task__list, .add__Task__Container{
   display: flex;
-  max-width: 960px;
+  max-width: 1020px;
   margin: 21px auto;
 }
 .task__list{
@@ -124,6 +126,8 @@ body, textarea, div, button, p {
 .add__Task__Textarea{
   width: 100%;
   border: 1px solid #222;
+  padding: 3px;
+  resize: none;
 }
 
 .add__Task__Btn{
@@ -136,23 +140,43 @@ body, textarea, div, button, p {
 
 .act__list{
   margin: 6px 0;
-  background-color: rgb(223, 223, 223);
   width: 100%;
-
+  padding: 0 8px
 }
 .act__list article{
   display: flex;
   padding: 8px;
 }
+.actTaskArticle{
+  background-color: rgb(223, 223, 223);
+  margin: 2px 0;
+  border-radius: 2px;
+}
+.actTaskArticle p {
+  align-self: center;
+}
 .actTaskArticle:hover p{
   text-decoration: line-through;
 }
+
+
+.compTaskArticle{
+  background-color: rgb(121, 211, 125);
+  margin: 2px 0;
+  border-radius: 2px;
+}
 .compTaskArticle p{
   text-decoration: line-through;
+  align-self: center;
 
 }
 .compTaskArticle:hover p {
   text-decoration: none;
+}
+.compTaskArticle button,
+.actTaskArticle button {
+  margin-left: 4px;
+  border-radius: 2px;
 }
 .delBtn{
   padding: 8px;
@@ -169,8 +193,8 @@ body, textarea, div, button, p {
 }
 .comp__list{
   margin: 6px 0;
-  background-color: rgb(121, 211, 125);
   width: 100%;
+  padding: 8px;
 
 }
 .comp__list article {

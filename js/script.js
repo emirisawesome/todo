@@ -137,9 +137,9 @@ const deleteTask = (event) => {
 }
 
 
-
 const completeTask = (event) => {
-    let target = event.target.innerHTML
+    let target = event.path[0].dataset.task
+
     let actTasks = JSON.parse(localStorage.getItem('acttasks'))
     let compTasks = JSON.parse(localStorage.getItem('comptasks'))
 
@@ -158,7 +158,8 @@ const completeTask = (event) => {
 
 
 const deCompleteTask = (event) => {
-    let target = event.target.innerHTML
+    let target = event.path[0].dataset.task
+
     let actTasks = JSON.parse(localStorage.getItem('acttasks'))
     let compTasks = JSON.parse(localStorage.getItem('comptasks'))
 
@@ -201,7 +202,7 @@ const changeTaskVal = (changedTaskTextareaVal, target) => {
 }
 
 const editTask = (event) => {
-    let target = event.target.dataset.teskname
+    let target = event.target.dataset.taskname
 
     let popupWrapper = document.createElement('div')
     popupWrapper.className = 'popupWrapper'
@@ -277,12 +278,14 @@ const displayTasks = () => {
         let actTaskArticle = document.createElement('article')
         actTaskArticle.className = 'actTaskArticle'
         actTaskArticle.id = `${taskId}`
+        actTaskArticle.setAttribute('data-task', `${i}`)
         actTaskArticle.addEventListener('click', completeTask)
         actList.append(actTaskArticle)
 
         let actTaskText = document.createElement('p')
         actTaskText.className = 'actTaskText'
         actTaskText.id = `${taskId}`
+        actTaskText.setAttribute('data-task', `${i}`)
         actTaskText.innerHTML = `${i}`
         actTaskArticle.append(actTaskText)
 
@@ -290,7 +293,7 @@ const displayTasks = () => {
         editBtn.className = 'editBtn'
         editBtn.innerHTML = 'Edit'
         editBtn.id = `${taskId}`
-        editBtn.setAttribute('data-teskname', `${i}`)
+        editBtn.setAttribute('data-taskname', `${i}`)
         editBtn.addEventListener('click', editTask)
         actTaskArticle.append(editBtn)
 
@@ -313,12 +316,14 @@ const displayTasks = () => {
         let compTaskArticle = document.createElement('article')
         compTaskArticle.className = 'compTaskArticle'
         compTaskArticle.id = `${taskId}`
+        compTaskArticle.setAttribute('data-task', `${i}`)
         compTaskArticle.addEventListener('click', deCompleteTask)
         compList.append(compTaskArticle)
 
         let compTaskText = document.createElement('p')
         compTaskText.className = 'compTaskText'
         compTaskText.id = `${taskId}`
+        compTaskText.setAttribute('data-task', `${i}`)
         compTaskText.innerHTML = `${i}`
         compTaskArticle.append(compTaskText)
 
@@ -326,7 +331,7 @@ const displayTasks = () => {
         editBtn.className = 'editBtn'
         editBtn.innerHTML = 'Edit'
         editBtn.id = `${taskId}`
-        editBtn.setAttribute('data-teskname', `${i}`)
+        editBtn.setAttribute('data-taskname', `${i}`)
         editBtn.addEventListener('click', editTask)
         compTaskArticle.append(editBtn)
 
